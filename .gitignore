@@ -1,0 +1,10 @@
+*.o
+.DS_Store
+
+tpcds-toolkit/tools/mkheader
+tpcds-toolkit/tools/distcomp
+tpcds-toolkit/tools/dsdgen
+tpcds-toolkit/tools/dsqgen
+tpcds-toolkit/tools/checksum
+
+gen-queries-*
