@@ -5,8 +5,6 @@ source ${this_dir}/_env.sh
 
 set -eu
 
-dbgen_result_dir=${data_dir}/gen-data-${scale_factor}
-
 function gen_data()
 {
 	if [ -d ${dbgen_result_dir} ]; then

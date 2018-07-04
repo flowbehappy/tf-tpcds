@@ -7,4 +7,5 @@ tpcds-toolkit/tools/dsdgen
 tpcds-toolkit/tools/dsqgen
 tpcds-toolkit/tools/checksum
 
-gen-queries-*
+gen-data*
+gen-queries*

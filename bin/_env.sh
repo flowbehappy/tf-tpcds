@@ -30,6 +30,22 @@ function build_toolkit()
 	cd ${toolkit_dir}/tools/ && make os=$os -j4 && cd -
 }
 
+# ===================================================
+# Configurations
+# ===================================================
 
+# Scale factor of TPC-DS. 1 means ~1GB data.
 scale_factor="1"
+# The data path used to store generated data.
 data_dir="${repo_dir}"
+# The root path of tf project.
+tf_home=$(cd ${repo_dir}/../tf;echo $PWD)
+# The database name for tpcds tables.
+tpcds_database="tpcds"
+
+
+# ===================================================
+# Don't touch
+# ===================================================
+
+dbgen_result_dir=${data_dir}/gen-data-${scale_factor}
