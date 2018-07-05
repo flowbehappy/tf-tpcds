@@ -5,6 +5,11 @@ source ${this_dir}/_env.sh
 
 set -eu
 
+if [ "$#" -lt 1 ]; then
+	echo "Usage: <bin> table_name|ALL"
+	exit 1
+fi
+
 table=$1
 
 if [ -z $table ]; then
@@ -19,7 +24,7 @@ function import_table()
 	table_name=$1
 	# Create local CSV table.
 	schema=`cat ${repo_dir}/table-schemas/${table_name}.sql | perl -pe "s/#.*//g" | perl -pe "s/${table_name}\n/${tpcds_database}.${table_name}\n/g" | perl -pe "s/\n/ /g"`
-	schema+=" USING csv OPTIONS(header 'false', delimiter '|', path '${dbgen_result_dir}/${table_name}.dat')"
+	schema+=" USING csv OPTIONS(header 'false', delimiter '|', path '${data_gen_result_dir}/${table_name}.dat')"
 	# echo ${schema}
 	old_dir=`pwd` && cd ${tf_home}/benchmark
 	

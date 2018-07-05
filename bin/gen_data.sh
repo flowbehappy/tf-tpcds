@@ -7,19 +7,19 @@ set -eu
 
 function gen_data()
 {
-	if [ -d ${dbgen_result_dir} ]; then
-		echo "Data already exists: ${dbgen_result_dir}"
+	if [ -d ${data_gen_result_dir} ]; then
+		echo "Data already exists: ${data_gen_result_dir}"
 		return
 	fi
 
-	dbgen_result_dir_tmp=${dbgen_result_dir}_tmp
+	dbgen_result_dir_tmp=${data_gen_result_dir}_tmp
 	cd ${toolkit_dir}/tools/
 	mkdir -p ${dbgen_result_dir_tmp}
 	${toolkit_dir}/tools/dsdgen -sc ${scale_factor} -dir ${dbgen_result_dir_tmp} -f
 	cd -
-	mv ${dbgen_result_dir_tmp} ${dbgen_result_dir}
+	mv ${dbgen_result_dir_tmp} ${data_gen_result_dir}
 
-	echo "Generate data with scale factor ${scale_factor} done! Location: ${dbgen_result_dir}"
+	echo "Generate data with scale factor ${scale_factor} done! Location: ${data_gen_result_dir}"
 }
 
 

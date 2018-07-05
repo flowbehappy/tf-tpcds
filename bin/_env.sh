@@ -12,7 +12,7 @@ _get_is_mac() {
 }
 export is_mac=`_get_is_mac`
 
-echo "repo dir: ${repo_dir}"
+echo "Repo: ${repo_dir}"
 
 toolkit_dir=${repo_dir}/tpcds-toolkit
 
@@ -42,10 +42,13 @@ data_dir="${repo_dir}"
 tf_home=$(cd ${repo_dir}/../tf;echo $PWD)
 # The database name for tpcds tables.
 tpcds_database="tpcds"
+# The iteration of all queries to generate report
+report_iteration=5
 
 
 # ===================================================
 # Don't touch
 # ===================================================
 
-dbgen_result_dir=${data_dir}/gen-data-${scale_factor}
+data_gen_result_dir=${data_dir}/gen-data-${scale_factor}
+queries_gen_result_dir=${data_dir}/gen-queries-${scale_factor}
