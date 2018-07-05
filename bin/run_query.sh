@@ -23,6 +23,7 @@ else
 	n="$2"
 fi
 
+echo "======================================"
 echo "query: ${n}, is_qualify: ${is_qualify}"
 
 define_line=`cat "${tf_home}/benchmark/_env.sh" | grep "default_partitionsPerSplit"`
@@ -30,7 +31,7 @@ eval "$define_line"
 
 partitionsPerSplit=$default_partitionsPerSplit
 
-if [ "$is_qualify" = "qualify" ]; then
+if [ "$is_qualify" = "yes" ]; then
 	queries_dir="${repo_dir}/qualification-queries"
 else
 	queries_dir="${queries_gen_result_dir}"
