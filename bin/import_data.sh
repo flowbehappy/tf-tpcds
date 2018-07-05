@@ -5,13 +5,20 @@ source ${this_dir}/_env.sh
 
 set -eu
 
+table=$1
 
+if [ -z $table ]; then
+	table="ALL"
+elif [ $table = "-h" ]; then
+	echo "Usage: <bin> table_name|ALL"
+	exit
+fi
 
 function import_table()
 {
 	table_name=$1
 	# Create local CSV table.
-	schema=`cat ${repo_dir}/table-schemas/${table_name}.sql | perl -pe "s/#.*//g" | perl -pe "s/ ${table_name}/ ${tpcds_database}.${table_name}/g" | perl -pe "s/\n/ /g"`
+	schema=`cat ${repo_dir}/table-schemas/${table_name}.sql | perl -pe "s/#.*//g" | perl -pe "s/${table_name}\n/${tpcds_database}.${table_name}\n/g" | perl -pe "s/\n/ /g"`
 	schema+=" USING csv OPTIONS(header 'false', delimiter '|', path '${dbgen_result_dir}/${table_name}.dat')"
 	# echo ${schema}
 	old_dir=`pwd` && cd ${tf_home}/benchmark
@@ -41,7 +48,7 @@ function import_table()
 	echo $pk
 
 	old_dir=`pwd` && cd ${tf_home}/benchmark
-	${tf_home}/benchmark/create-ch-table.sh "${tpcds_database}" "${table_name}" "${tpcds_database}" "${table_name}" $pk
+	${tf_home}/benchmark/spark-create-ch-table.sh "${tpcds_database}" "${table_name}" "${tpcds_database}" "${table_name}" $pk
 	cd $old_dir
 }
 
@@ -54,5 +61,9 @@ function import_all()
 	done
 }
 
-import_all
+if [ $table = "ALL" ] || [ $table = "all" ]; then
+	import_all
+else
+	import_table ${table}
+fi
 
