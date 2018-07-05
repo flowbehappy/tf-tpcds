@@ -5,8 +5,8 @@ def run():
         return line.find('## Running query #') == 0;
 
     def isStart(line):
-        # return line == 'Spark session available as \'spark\'.'
-        return line.find('org.apache.spark.sql.AnalysisException') == 0
+        return line == 'Spark session available as \'spark\'.'
+        # return line.find('org.apache.spark.sql.AnalysisException') == 0
 
     def isScore(line):
         return line.find('elapsed: Double = ') == 0

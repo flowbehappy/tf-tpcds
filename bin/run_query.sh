@@ -36,6 +36,11 @@ else
 	queries_dir="${queries_gen_result_dir}"
 fi
 
+if [ ! -f ${queries_dir}/query${n}.sql ]; then
+	echo "Please run bin/gen_queries.sh first!"
+	exit 1
+fi
+
 sql=`cat ${queries_dir}/query${n}.sql | perl -pe "s/--.*//g" | perl -pe "s/;//g" | perl -pe "s/\n/ /g"`
 
 echo "## Running query #"$n", partitionsPerSplit=$partitionsPerSplit"
